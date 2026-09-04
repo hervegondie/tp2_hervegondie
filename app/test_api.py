@@ -48,11 +48,11 @@ def test_predict_missing_features_field():
     assert "detail" in response.json()
 
 # 2. Test : JSON syntaxiquement invalide (tableau brut au lieu d'un objet JSON)
-"""def test_predict_invalid_json_format():
+def test_predict_invalid_json_format():
     response = client.post(
         "/predict",
         headers={"Content-Type": "application/json"},
         content='{[3.5, 1.2, 4.9]}' # Chaine brute avec erreur de syntaxe JSON
     )
     # FastAPI/Starlette renvoie un code 422 ou 400 selon l'erreur de parsing
-    assert response.status_code in [400, 422]"""
+    assert response.status_code in [400, 422]
