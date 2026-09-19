@@ -1,7 +1,7 @@
 """ tp2"""
 
 
-import pytest
+#import pytest
 from app.utils import predict
 from fastapi.testclient import TestClient
 from app.main import app
