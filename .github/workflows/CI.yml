@@ -31,8 +31,8 @@ jobs:
       - name: Lint with flake8
         run: |
           pip install flake8
-          flake8 app tests --count --select=E9,F63,F7,F82 --show-source --statistics
-          flake8 app tests --count --exit-zero --max-complexity=10 --max-line-length=88 --statistics
+          flake8 app test-api --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 app test-api --count --exit-zero --max-complexity=10 --max-line-length=88 --statistics
       # Tests unitaires / async, ajout couverture de code
       - name: Run tests
         run: |
