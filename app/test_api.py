@@ -2,9 +2,12 @@
 
 
 #import pytest
+
 from app.main import app
-from app.utils import predict
 from fastapi.testclient import TestClient
+from pydantic import BaseModel
+from app.utils import predict
+
 
 
 
