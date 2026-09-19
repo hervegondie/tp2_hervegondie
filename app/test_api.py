@@ -1,10 +1,16 @@
 """ tp2"""
 
 
-import pytest
-from app.utils import predict
+#import pytest
+
 from fastapi.testclient import TestClient
+
 from app.main import app
+from app.utils import predict
+
+client = TestClient(app)
+
+
 
 
 def test_predict_success():
