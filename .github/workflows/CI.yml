@@ -27,8 +27,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip list
-      # Tests unitaires / async
+      # Linting – qualité du code
+      - name: Lint with flake8
+        run: |
+          pip install flake8
+          flake8 app tests --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 app tests --count --exit-zero --max-complexity=10 --max-line-length=88 --statistics
+      # Tests unitaires / async, ajout couverture de code
       - name: Run tests
         run: |
           export PYTHONPATH=$(pwd)
-          pytest --maxfail=1 --disable-warnings -q
+          pytest --maxfail=1 --disable-warnings -q --cov=app --cov-report=xml --cov-report=term-missing
+
+      # Vérifier la sécurité des dépendances (optionnel)
+      - name: Check for security issues
+        run: |
+          safety check  || true
