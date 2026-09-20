@@ -12,7 +12,7 @@ client = TestClient(app)
 
 
 
-
+#Un test qui valide une prédiction correcte avec les valeurs [1.0, 2.0, 3.0].
 def test_predict_success():
     # Données d'entrée
     input_data = [1.0, 2.0, 3.0]
@@ -27,6 +27,8 @@ def test_predict_success():
     assert result == expected_output
  
  
+ #Un test qui valide une prédiction incorrecte (ex. : comparer avec un résultat
+ #attendu volontairement faux).
 client = TestClient(app)
 
 def test_predict_fails_on_wrong_expectation():
@@ -38,22 +40,22 @@ def test_predict_fails_on_wrong_expectation():
     
     WRONG_PREDICTION = 999.99
     
-    # On s'assure directement que le résultat n'est PAS la valeur erronée
     assert data.get("result") != WRONG_PREDICTION
 
-    
+#Un test qui envoie un JSON incorrect (exemple : champ features manquant,
+#{[3.5, 1.2, 4.9]}).
 client = TestClient(app)
 
-# 1. Test : Champ "features" manquant dans le JSON
+# Champ "features" manquant dans le JSON
 def test_predict_missing_features_field():
     response = client.post(
-        "/predict", # Remplacez par votre route
+        "/predict", 
         json={"wrong_field": [3.5, 1.2, 4.9]}
     )
     assert response.status_code == 422
     assert "detail" in response.json()
 
-# 2. Test : JSON syntaxiquement invalide (tableau brut au lieu d'un objet JSON)
+# JSON syntaxiquement invalide (tableau brut au lieu d'un objet JSON)
 def test_predict_invalid_json_format():
     response = client.post(
         "/predict",
